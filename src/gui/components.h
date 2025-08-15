@@ -1,12 +1,7 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-// Frames are similar to meshes
-typedef struct Frame {
-    unsigned int VAO;
-    unsigned int Size;
-} Frame;
-
+#include "render.h"
 
 typedef struct Panel {
     int id;

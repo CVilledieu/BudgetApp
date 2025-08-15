@@ -7,10 +7,9 @@
 // Frames build into Panels, Panels are then built into Containers
 // Containers are then used to create Buttons and other elements.
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+
 #include <stdlib.h>
-#include "elements.h"
+#include "components.h"
 
 
 Container *Container_Create(Container *parent) {

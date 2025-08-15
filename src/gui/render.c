@@ -1,3 +1,6 @@
+
+
+
 const char *vert_shader_source = "#version 330 core \n"
 "layout (location = 0) in vec3 aPos; \n"
 "uniform mat4 view;\n"
@@ -12,4 +15,6 @@ const char *frag_shader_source = "#version 330 core \n"
 "void main() {\n"
     "FragColor = color;\n"
 "}\n";
+
+
 
