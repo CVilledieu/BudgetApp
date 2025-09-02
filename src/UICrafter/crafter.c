@@ -20,22 +20,22 @@ UICtx* UICtx_Init(char* title){
     return new_ctx;
 }
 
-static void draw_init(float* bgColor){
+static void render_init(float* bgColor){
     glClearColor(bgColor[0], bgColor[1], bgColor[2], bgColor[3]);
     glClear(GL_COLOR_BUFFER_BIT );
 }
 
-static void draw_end(GLFWwindow* wnd){
-    glfwSwapBuffers(wnd);
+static void render_end(WndCtx* ctx){
+    glfwSwapBuffers(ctx->wnd);
     glfwPollEvents();
 }
 
-void Draw(UICtx* ctx){
-    draw_init(ctx->bgColor);
+void Render(UICtx* ctx){
+    render_init(ctx->bgColor);
     
     
 
-    draw_end(ctx->wnd);
+    render_end(ctx->wnd);
 }
 
 unsigned int vao_new_quad(){
@@ -64,4 +64,9 @@ unsigned int vao_new_quad(){
     glEnableVertexAttribArray(0);
 
     return VAO;
+}
+
+
+void draw_Widget(Widget* content){
+
 }

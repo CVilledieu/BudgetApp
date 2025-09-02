@@ -9,7 +9,6 @@ typedef struct WndCtx {
     int height;
     int width;
     GLFWwindow* wnd;
-    UICtx* ui;
 } WndCtx;
 
 typedef struct UIctx {
@@ -21,5 +20,25 @@ typedef struct UIctx {
 
 WndCtx* WndCtx_Init(char* title);
 UICtx* UICtx_Init(char* title);
+void Render(UICtx* ctx);
+
+typedef struct Mesh{
+    unsigned int VAO;
+    unsigned int shader;
+}Mesh;
+
+
+typedef struct Widget Widget;
+
+struct Widget{
+    int visible;
+    float height;
+    float width;
+    float* pos;
+    float* color;
+    Widget* parent;
+    Widget* children;
+    Mesh* mesh;
+};
 
 #endif

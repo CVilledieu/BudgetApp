@@ -1,11 +1,13 @@
 #version 330 core
-layout (location = 0) in vec3 aPos;
+layout (location = 0) in vec2 aPos;
 
-uniform mat4 view;
-uniform mat4 model;
+uniform vec2 u_translate;
+uniform vec2 u_scale;
 
 void main()
 {  
-    gl_Position = view * model * vec4(aPos, 1.0);
+    vec2 scaled = a_Position * u_scale;
+    vec2 transformed = scaled + u_translate;
+    gl_Position = vec4(transformed, 0.0, 1.0);
 
 }
