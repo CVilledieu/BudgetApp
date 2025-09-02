@@ -1,1 +1,22 @@
+# CMake build files and folders
+/build/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/Makefile
+
+# Compiled binaries
+/bin/
+*.exe
+*.o
+*.obj
+*.dll
+*.lib
+*.a
+
+# Other editor/OS files
+*.log
+.DS_Store
+Thumbs.db
 bin/
+design.txt

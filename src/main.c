@@ -1,10 +1,10 @@
-#include "gui/gui.h"
+#include "UICrafter/crafter.h"
 
 int main(void){
-    // Initialize GUI
-    // Initialize APP
-    // Render APP in GUI
-    // Cleanup and exit
+    UIctx* ctx = gui_init();
+
+    DrawUI(&ctx);
+
 
 }
 
