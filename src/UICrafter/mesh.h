@@ -6,11 +6,11 @@ typedef struct Mesh{
     unsigned int VAO;
     unsigned int VBO;
     unsigned int EBO;
-    unsigned int shader;
-    int count;
-    
+    unsigned int shader_id;
+    int index_count;
+    float* color; 
 }Mesh;
 
-Mesh* Mesh_init(unsigned int shader_id);
+Mesh* Mesh_init(void);
 
 #endif
