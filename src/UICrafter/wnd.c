@@ -1,14 +1,15 @@
-#include "crafter.h"
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
+#include "wnd.h"
 
-
-static void wndCB_resize(GLFWwindow* wnd, int width, int height) {
+static void resize_cb(GLFWwindow* wnd, int width, int height) {
     WndCtx* ctx = (WndCtx*)glfwGetWindowUserPointer(wnd);
     ctx->height = height;
     ctx->width = width;
     glViewport(0, 0, width, height);
 }
 
-static void wndCB_keypress(GLFWwindow* window, int key, int scancode, int action, int mods) {
+static void keypress_cb(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action != GLFW_PRESS && action != GLFW_REPEAT) {
         return;
     }
@@ -25,13 +26,10 @@ static void wndCB_keypress(GLFWwindow* window, int key, int scancode, int action
 	(void)mods;
 }
 
-
-
-
 WndCtx* WndCtx_Init(char* title){
-    WndCtx* WCtx = malloc(sizeof(WndCtx));
-    WCtx->width = 800;
-    WCtx->height = 600;
+    WndCtx* ctx = malloc(sizeof(WndCtx));
+    ctx->width = 800;
+    ctx->height = 600;
 
     if (!glfwInit()){
         printf("%s\n", "Failed to initialize GLFW");
@@ -41,7 +39,7 @@ WndCtx* WndCtx_Init(char* title){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    GLFWwindow* new_wnd = glfwCreateWindow(WCtx->width, WCtx->height, title, NULL, NULL);
+    GLFWwindow* new_wnd = glfwCreateWindow(ctx->width, ctx->height, title, NULL, NULL);
     if (!new_wnd){
         printf("%s\n", "Failed to create GLFW window");
         glfwTerminate();
@@ -53,11 +51,11 @@ WndCtx* WndCtx_Init(char* title){
         return NULL;
     }
     
-    glViewport(0, 0, WCtx->width, WCtx->height);
+    glViewport(0, 0, ctx->width, ctx->height);
 
-    glfwSetWindowUserPointer(new_wnd, WCtx);
-    glfwSetFramebufferSizeCallback(new_wnd, wndCB_resize);
-    glfwSetKeyCallback(new_wnd, wndCB_keypress);
+    glfwSetWindowUserPointer(new_wnd, ctx);
+    glfwSetFramebufferSizeCallback(new_wnd, resize_cb);
+    glfwSetKeyCallback(new_wnd, keypress_cb);
 
-    return WCtx;
+    return ctx;
 }

@@ -2,6 +2,11 @@
     "files.associations": {
         "components.h": "c",
         "stdio.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "crafter.h": "c",
+        "glfw3.h": "c",
+        "glad.h": "c",
+        "mesh.h": "c",
+        "cstdlib": "c"
     }
 }
