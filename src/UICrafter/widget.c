@@ -2,6 +2,7 @@
 #include "GLFW/glfw3.h"
 #include "widget.h"
 #include <stdlib.h>
+#include "shaders.h"
 
 //Tasks:
 //  Function: Convert pos 
@@ -39,12 +40,14 @@ Widget* Widget_create(Widget_Type type){
 
 
 
-void Widget_draw(){
-    
-    glUseProgram(mesh->shader->id);
-    set_uniforms(mesh->shader);
-    glBindVertexArray(mesh->VAO);
-    glDrawElements(GL_TRIANGLES, mesh->index_count, GL_UNSIGNED_INT, 0);
+void Shape_draw(Shader* shader, Shape* shape){
+    glUseProgram(shader->id);
+    glUniform2fv(shader->pos_u_loc, 1, shape->position);
+    glUniform2fv(shader->scale_u_loc, 1, shape->scale);
+    glUniform4fv(shader->color_u_loc, 1, shape->color);
+
+    glBindVertexArray(shape->mesh->VAO);
+    glDrawElements(GL_TRIANGLES, shape->mesh->index_count, GL_UNSIGNED_INT, 0);
 
     //Unbind to prevent anything unintended
     glBindVertexArray(0);

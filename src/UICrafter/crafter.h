@@ -3,7 +3,6 @@
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include "wnd.h"
 #include "widget.h"
 #include "shaders.h"
 
@@ -21,7 +20,7 @@ typedef struct UICtx {
 
 
 UICtx* UICtx_init(char* title); 
-void Canvas_render(UICtx* ctx);
+void render(UICtx* ctx);
 
 
 

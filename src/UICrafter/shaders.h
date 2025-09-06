@@ -18,6 +18,6 @@ typedef struct Shader{
     int pos_u_loc;
 } Shader;
 
-Shader* Shader_init();
+void Shader_create_id(Shader* shader);
 
 #endif

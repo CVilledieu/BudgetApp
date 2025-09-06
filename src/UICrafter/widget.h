@@ -13,10 +13,10 @@ typedef struct Shape {
 typedef struct Widget{
     int visible;
     unsigned int child_count;
-    unsigned int shader_id;
     Widget* children;
     Widget* parent;
     Shape* shape;
+    void* data;
 } Widget;
 
 

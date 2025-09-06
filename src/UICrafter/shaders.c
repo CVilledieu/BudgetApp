@@ -39,30 +39,26 @@ static unsigned int create(char *fName, GLenum type){
 	return shObj;
 }
 
-unsigned int Shader_create_id(){
-    unsigned int shader, frag, vert;
+void Shader_create_id(Shader* shader){
+    unsigned int frag, vert;
     frag = compile(SHADER_PATH_FRAG, GL_FRAGMENT_SHADER);
     vert = compile(SHADER_PATH_VERT, GL_VERTEX_SHADER);
-    shader = glCreateProgram();
-    glAttachShader(shader, frag);
-    glAttachShader(shader, vert);
-    glLinkProgram(shader);
+    shader->id = glCreateProgram();
+    glAttachShader(shader->id, frag);
+    glAttachShader(shader->id, vert);
+    glLinkProgram(shader->id);
 
     int ok;
-    glGetProgramiv(shader, GL_LINK_STATUS, &ok);
+    glGetProgramiv(shader->id, GL_LINK_STATUS, &ok);
     if (!ok){
         printf("%s\n", "Failed to compile shader");
         glfwTerminate();
     }
     glDeleteShader(frag);
     glDeleteShader(vert);
-}
-
-
-
-void Shader_init(Shader* shader){
-    shader->id = Shader_create_id();
     shader->color_u_loc = glGetUniformLocation(shader->id, "u_color"); 
     shader->pos_u_loc   = glGetUniformLocation(shader, "u_translate");
     shader->scale_u_loc = glGetUniformLocation(shader, "u_scale");
 }
+
+
