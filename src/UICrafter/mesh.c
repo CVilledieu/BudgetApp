@@ -90,7 +90,18 @@ Mesh* Mesh_init(void){
     glEnableVertexAttribArray(0);
 
     mesh->shader_id = Shader_init();
+    mesh->color = malloc(sizeof(float) * 4);
     return mesh;
 }
 
 
+void Mesh_update_color(Mesh* mesh, float* color){
+    mesh->color[0] = color[0];
+    mesh->color[1] = color[1];
+    mesh->color[2] = color[2];
+    mesh->color[3] = color[3];
+}
+
+static void convert_color(){
+
+}

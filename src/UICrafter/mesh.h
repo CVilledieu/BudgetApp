@@ -8,7 +8,6 @@ typedef struct Mesh{
     unsigned int EBO;
     unsigned int shader_id;
     int index_count;
-    float* color; 
 }Mesh;
 
 Mesh* Mesh_init(void);

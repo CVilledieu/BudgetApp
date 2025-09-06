@@ -1,11 +1,11 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include "wnd.h"
+#include "crafter.h"
 
 static void resize_cb(GLFWwindow* wnd, int width, int height) {
-    WndCtx* ctx = (WndCtx*)glfwGetWindowUserPointer(wnd);
-    ctx->height = height;
-    ctx->width = width;
+    UICtx* ctx = (UICtx*)glfwGetWindowUserPointer(wnd);
+    ctx->wnd_height = height;
+    ctx->wnd_width = width;
     glViewport(0, 0, width, height);
 }
 
@@ -26,11 +26,7 @@ static void keypress_cb(GLFWwindow* window, int key, int scancode, int action, i
 	(void)mods;
 }
 
-WndCtx* WndCtx_Init(char* title){
-    WndCtx* ctx = malloc(sizeof(WndCtx));
-    ctx->width = 800;
-    ctx->height = 600;
-
+void WndCtx_Init(UICtx* ctx){
     if (!glfwInit()){
         printf("%s\n", "Failed to initialize GLFW");
         return NULL;
@@ -39,7 +35,7 @@ WndCtx* WndCtx_Init(char* title){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    GLFWwindow* new_wnd = glfwCreateWindow(ctx->width, ctx->height, title, NULL, NULL);
+    GLFWwindow* new_wnd = glfwCreateWindow(ctx->wnd_width, ctx->wnd_height, ctx->wnd_title, NULL, NULL);
     if (!new_wnd){
         printf("%s\n", "Failed to create GLFW window");
         glfwTerminate();
@@ -51,11 +47,11 @@ WndCtx* WndCtx_Init(char* title){
         return NULL;
     }
     
-    glViewport(0, 0, ctx->width, ctx->height);
+    glViewport(0, 0, ctx->wnd_width, ctx->wnd_height);
 
     glfwSetWindowUserPointer(new_wnd, ctx);
     glfwSetFramebufferSizeCallback(new_wnd, resize_cb);
     glfwSetKeyCallback(new_wnd, keypress_cb);
 
-    return ctx;
+    ctx->wnd = new_wnd;
 }

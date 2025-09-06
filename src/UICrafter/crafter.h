@@ -1,21 +1,24 @@
 #ifndef CRAFTER_H
 #define CRAFTER_H
 
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 #include "wnd.h"
-#include "Container.h"
-
-
+#include "widget.h"
 
 
 typedef struct UICtx {
-    unsigned int container_count;
-    Container* containers;
-    WndCtx* wnd_ctx;
+    int wnd_width;
+    int wnd_height;
+    char* wnd_title;
+    GLFWwindow* wnd;
+    Widget* canvas;
 } UICtx;
 
 
-UICtx* UICtx_Init(char* title); 
-void Render(UICtx* ctx);
+
+UICtx* UICtx_init(char* title); 
+void Canvas_render(UICtx* ctx);
 
 
 
