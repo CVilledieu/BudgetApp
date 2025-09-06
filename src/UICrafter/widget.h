@@ -3,15 +3,20 @@
 
 #include "mesh.h"
 
+typedef struct Shape {
+    Vec2 scale;
+    Vec2 position; 
+    Vec4 color;
+    Mesh* mesh;
+} Shape;
+
 typedef struct Widget{
     int visible;
-    float height, width;
     unsigned int child_count;
-    float* pos; // pos[0] = x, pos[1] = y
-    float* color; 
+    unsigned int shader_id;
     Widget* children;
     Widget* parent;
-    Mesh* mesh;
+    Shape* shape;
 } Widget;
 
 

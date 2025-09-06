@@ -1,3 +1,5 @@
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
 #include "widget.h"
 #include <stdlib.h>
 
@@ -36,9 +38,14 @@ Widget* Widget_create(Widget_Type type){
 }
 
 
-void Widget_set_color(Widget* widget, float* colors){
-    widget->color[0] = colors[0];
-    widget->color[1] = colors[1];
-    widget->color[2] = colors[2];
-    widget->color[3] = colors[3];
+
+void Widget_draw(){
+    
+    glUseProgram(mesh->shader->id);
+    set_uniforms(mesh->shader);
+    glBindVertexArray(mesh->VAO);
+    glDrawElements(GL_TRIANGLES, mesh->index_count, GL_UNSIGNED_INT, 0);
+
+    //Unbind to prevent anything unintended
+    glBindVertexArray(0);
 }

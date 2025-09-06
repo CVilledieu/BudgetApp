@@ -2,6 +2,6 @@
 #define WND_H
 
 
-void WndCtx_Init(UICtx* ctx);
+void WndCtx_init(UICtx* ctx);
 
 #endif

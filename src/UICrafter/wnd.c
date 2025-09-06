@@ -26,7 +26,7 @@ static void keypress_cb(GLFWwindow* window, int key, int scancode, int action, i
 	(void)mods;
 }
 
-void WndCtx_Init(UICtx* ctx){
+void WndCtx_init(UICtx* ctx){
     if (!glfwInit()){
         printf("%s\n", "Failed to initialize GLFW");
         return NULL;

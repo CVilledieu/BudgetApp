@@ -20,9 +20,9 @@ UICtx* UICtx_init(char* title){
 
 
 
-static void render_setup(float* color){
-    glClearColor(color[0], color[1], color[2], color[3]);
-    glClear(GL_COLOR_BUFFER_BIT );
+static void render_setup(){
+    glClearColor(0.0f, 0.0f, 0.0f,0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 static void render_end(GLFWwindow* wnd){
@@ -31,7 +31,7 @@ static void render_end(GLFWwindow* wnd){
 }
 
 void render_ui(UICtx* ctx){
-    render_setup(ctx->canvas->color);
+    render_setup();
     
     
 
