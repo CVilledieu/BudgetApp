@@ -3,22 +3,21 @@
 
 #include "mesh.h"
 
-typedef struct Shape {
+typedef struct View {
+    unsigned int shader_id;
     Vec2 scale;
     Vec2 position; 
     Vec4 color;
     Mesh* mesh;
-} Shape;
+} View;
 
 typedef struct Widget{
     int visible;
     unsigned int child_count;
     Widget* children;
     Widget* parent;
-    Shape* shape;
+    View* view;
     void* data;
 } Widget;
-
-
 
 #endif

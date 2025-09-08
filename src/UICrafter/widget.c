@@ -24,7 +24,6 @@ typedef enum Widget_Type{
 } Widget_Type;
 
 
-//int visible, float* pos, float height, float width
 Widget* Widget_create(Widget_Type type){
     Widget* new = malloc(sizeof(Widget));
     switch(type){
@@ -40,14 +39,15 @@ Widget* Widget_create(Widget_Type type){
 
 
 
-void Shape_draw(Shader* shader, Shape* shape){
-    glUseProgram(shader->id);
-    glUniform2fv(shader->pos_u_loc, 1, shape->position);
-    glUniform2fv(shader->scale_u_loc, 1, shape->scale);
-    glUniform4fv(shader->color_u_loc, 1, shape->color);
 
-    glBindVertexArray(shape->mesh->VAO);
-    glDrawElements(GL_TRIANGLES, shape->mesh->index_count, GL_UNSIGNED_INT, 0);
+void Shape_draw(Shader* shader, Model* model){
+    glUseProgram(shader->id);
+    glUniform2fv(shader->pos_u_loc, 1, model->position);
+    glUniform2fv(shader->scale_u_loc, 1, model->scale);
+    glUniform4fv(shader->color_u_loc, 1, model->color);
+
+    glBindVertexArray(model->mesh->VAO);
+    glDrawElements(GL_TRIANGLES, model->mesh->index_count, GL_UNSIGNED_INT, 0);
 
     //Unbind to prevent anything unintended
     glBindVertexArray(0);

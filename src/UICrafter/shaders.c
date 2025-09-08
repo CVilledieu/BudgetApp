@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include "shaders.h"
 
+Shader g_shader_list;
+
 static unsigned int create(char *fName, GLenum type){
     	unsigned int shObj = glCreateShader(type);
 

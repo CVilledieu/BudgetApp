@@ -6,6 +6,8 @@
 
 #define MAX_SHADER_COUNT 16
 
+extern Shader g_shader;
+
 typedef struct Shader_list{
     Shader shaders[MAX_SHADER_COUNT];
     int count;

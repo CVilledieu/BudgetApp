@@ -6,8 +6,6 @@
 #include "widget.h"
 #include "shaders.h"
 
-
-
 typedef struct UICtx {
     int wnd_width;
     int wnd_height;
@@ -17,12 +15,7 @@ typedef struct UICtx {
     Widget* canvas;
 } UICtx;
 
-
-
 UICtx* UICtx_init(char* title); 
 void render(UICtx* ctx);
-
-
-
 
 #endif
