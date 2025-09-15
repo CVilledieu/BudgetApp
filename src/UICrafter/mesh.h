@@ -1,8 +1,16 @@
 #ifndef MESH_H
 #define MESH_H
 
-typedef float Vec2[2];
-typedef float Vec4[4];
+
+
+typedef struct Shader{
+    unsigned int id;
+    int color_u_loc;
+    int view_u_loc;
+    int model_u_loc; 
+} Shader;
+
+
 
 typedef struct Mesh{
     unsigned int VAO;
@@ -11,7 +19,20 @@ typedef struct Mesh{
     int index_count;
 }Mesh;
 
-Mesh* Mesh_init(void);
-void Mesh_draw(Mesh* mesh);
+typedef float Mat4[16];
+
+//Alt names 
+//    Primitive
+//    Drawable
+//    GraphicObject
+//    RenderItem
+//    Frame
+//    Shape
+
+typedef struct Shape {
+    Mesh* mesh;
+    Shader* shader;
+    Mat4 model;
+} Shape;
 
 #endif
