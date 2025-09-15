@@ -1,6 +1,9 @@
 //Mesh should be initialized near at start up
 //The Mesh should then be refrenced for each Widget using that MeshType
 //This should reduce the number of Meshes and shaders created
+//Due to currently only having 1 MeshType so I have avoided unnecessary complexity 
+//Once additional Meshtpes are needed many functions will be updated to handle them
+//Areas that are expected to be updated with MeshTyping have been noted as such
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
@@ -12,7 +15,7 @@
 static void create_VertexData(VertexObject* vo);
 static void init_Shaders(Shader* shader);
 
-
+//Pending MeshTyping
 Mesh* init_Mesh(MeshType type){
     Mesh* mesh = malloc(sizeof(Mesh));
     mesh->mType = SQUARE;
@@ -21,12 +24,13 @@ Mesh* init_Mesh(MeshType type){
     return mesh;
 }
 
+//Pending MeshTyping
 void render_Mesh(Mesh* mesh){
     glBindVertexArray(mesh->VO->VAO);
     glDrawElements(GL_TRIANGLES, mesh->VO->index_count,GL_UNSIGNED_INT, 0);
 }
 
-
+//Pending MeshTyping
 static void create_VertexData(VertexObject* vo){
     float vertices[] = {
         0.0f, 0.0f,   0.5f, 0.0f,   0.0f,-0.5f,   0.5f, -0.5f
@@ -52,7 +56,7 @@ static void create_VertexData(VertexObject* vo){
 }
 
 
-//Shader paths
+//Pending MeshTyping
 #define SHADER_PATH_FRAG "./shaders/main.frag.glsl"
 #define SHADER_PATH_VERT "./shaders/main.vert.glsl"
 
@@ -92,6 +96,7 @@ static unsigned int compile_shaders(char *fName, GLenum type){
 	return shObj;
 }
 
+//Pending MeshTyping
 static void init_Shaders(Shader* shader){
     unsigned int frag, vert;
     frag = compile_shaders(SHADER_PATH_FRAG, GL_FRAGMENT_SHADER);
@@ -116,10 +121,10 @@ static void init_Shaders(Shader* shader){
 
 void set_uniform(unsigned int location, void* data, UniformType type){
         switch (type) {
-        case UNIFORM_VEC4:
+        case UT_VEC4:
             glUniform4fv(location, 1, (float*)data);
             break;
-        case UNIFORM_MAT4:
+        case UT_MAT4:
             glUniformMatrix4fv(location, 1, GL_FALSE, (float*)data);
             break;
     }

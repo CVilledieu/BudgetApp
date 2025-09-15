@@ -12,11 +12,7 @@
 
 UICtx* UICtx_init(char* title){
     UICtx* ctx = malloc(sizeof(UICtx));
-    ctx->wnd_title = title;
-    ctx->wnd_width = 800;
-    ctx->wnd_height = 600;
-    WndCtx_init(ctx);
-    Shader_create_id(&ctx->shader);
+    ctx->wnd = init_WndCtx(title, 600, 800);
     return ctx;
 }
 
@@ -27,8 +23,8 @@ static void render_setup(){
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-static void render_cleanup(GLFWwindow* wnd){
-    glfwSwapBuffers(wnd);
+static void render_cleanup(WndCtx* wc){
+    glfwSwapBuffers(wc->wnd);
     glfwPollEvents();
 }
 

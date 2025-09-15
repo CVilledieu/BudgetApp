@@ -5,6 +5,7 @@
 typedef struct Shader;
 typedef struct VertexData;
 typedef enum MeshType;
+typedef enum UniformType;
 
 typedef float Mat4[16];
 typedef float Vec4[4];
@@ -15,7 +16,7 @@ typedef struct Mesh {
     Shader* shader;
 } Mesh;
 
-typedef enum MeshType{
+typedef enum {
     SQUARE,
 } MeshType;
 
@@ -34,11 +35,8 @@ typedef struct VertexObject{
 }VertexObject;
 
 typedef enum {
-    UNIFORM_VEC2,
-    UNIFORM_VEC3,
-    UNIFORM_VEC4,
-    UNIFORM_MAT3,
-    UNIFORM_MAT4
+    UT_VEC4,
+    UT_MAT4,
 } UniformType;
 
 
