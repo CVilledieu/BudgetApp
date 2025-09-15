@@ -24,11 +24,6 @@ Mesh* init_Mesh(MeshType type){
     return mesh;
 }
 
-//Pending MeshTyping
-void render_Mesh(Mesh* mesh){
-    glBindVertexArray(mesh->VO->VAO);
-    glDrawElements(GL_TRIANGLES, mesh->VO->index_count,GL_UNSIGNED_INT, 0);
-}
 
 //Pending MeshTyping
 static void create_VertexData(VertexObject* vo){
@@ -119,7 +114,7 @@ static void init_Shaders(Shader* shader){
     shader->model_u_loc = glGetUniformLocation(shader->id, "u_model");
 }
 
-void set_uniform(unsigned int location, void* data, UniformType type){
+static void set_uniform(unsigned int location, void* data, UniformType type){
         switch (type) {
         case UT_VEC4:
             glUniform4fv(location, 1, (float*)data);
@@ -128,4 +123,20 @@ void set_uniform(unsigned int location, void* data, UniformType type){
             glUniformMatrix4fv(location, 1, GL_FALSE, (float*)data);
             break;
     }
+}
+
+//Pending MeshTyping
+void render_Mesh(Mesh* mesh, Mat4 model, Vec4 color){
+    //switch(MeshType){
+    //  case SQUARE: 
+    
+    set_uniform(mesh->shader->color_u_loc, color, UT_VEC4);
+    set_uniform(mesh->shader->model_u_loc, model, UT_MAT4);
+    glBindVertexArray(mesh->VO->VAO);
+    glDrawElements(GL_TRIANGLES, mesh->VO->index_count,GL_UNSIGNED_INT, 0);
+    
+    
+    // break;
+    //}
+    glBindVertexArray(0);
 }

@@ -1,6 +1,7 @@
 #ifndef WND_H
 #define WND_H
 
+#include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
 #define MAX_WND_TITLE 16

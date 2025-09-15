@@ -41,8 +41,6 @@ typedef enum {
 
 
 Mesh* init_Mesh(MeshType type);
-void render_Mesh(Mesh* mesh);
-void set_uniform(unsigned int location, void* data, UniformType type);
-
+void render_Mesh(Mesh* mesh, Mat4 model, Vec4 color);
 
 #endif

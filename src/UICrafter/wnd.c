@@ -1,6 +1,4 @@
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "crafter.h"
+#include "wnd.h"
 
 static void resize_cb(GLFWwindow* wnd, int new_width, int new_height) {
     WndCtx* ctx = (WndCtx*)glfwGetWindowUserPointer(wnd);

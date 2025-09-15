@@ -1,6 +1,7 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+
 #include "mesh.h"
 
 typedef struct Widget{
@@ -20,7 +21,7 @@ typedef enum Widget_Type{
 typedef struct RenderData {
     Mat4 model;
     Vec4 color;
-    Mesh* mesh;
+    MeshType* type;
 } RenderData;
 
 
