@@ -1,21 +1,33 @@
+//Mesh should be initialized near at start up
+//The Mesh should then be refrenced for each Widget using that MeshType
+//This should reduce the number of Meshes and shaders created
+
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "mesh.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 //Forward declarations
-static void Mesh_init(Mesh* mesh);
-static void Shader_init(Shader* shader);
+static void create_VertexData(VertexObject* vo);
+static void init_Shaders(Shader* shader);
 
 
-Shape* Shape_int(){
-    Shape* new_shape = malloc(sizeof(Shape));
-    new_shape->mesh = malloc(sizeof(Mesh));
-    new_shape->shader = malloc(sizeof(Shader));
-    Mesh_init(new_shape->mesh);    
+Mesh* init_Mesh(MeshType type){
+    Mesh* mesh = malloc(sizeof(Mesh));
+    mesh->mType = SQUARE;
+    create_VertexData(mesh->VO);
+    init_Shaders(mesh->shader);
+    return mesh;
 }
 
-static void Mesh_init(Mesh* mesh){
+void render_Mesh(Mesh* mesh){
+    glBindVertexArray(mesh->VO->VAO);
+    glDrawElements(GL_TRIANGLES, mesh->VO->index_count,GL_UNSIGNED_INT, 0);
+}
+
+
+static void create_VertexData(VertexObject* vo){
     float vertices[] = {
         0.0f, 0.0f,   0.5f, 0.0f,   0.0f,-0.5f,   0.5f, -0.5f
     };
@@ -23,26 +35,26 @@ static void Mesh_init(Mesh* mesh){
         0,1,2,  1,2,3
     };
 
-    glGenBuffers(1, &mesh->EBO);
-    glGenBuffers(1, &mesh->VBO);
-    glGenVertexArrays(1, mesh->VAO);
-    glBindVertexArray(mesh->VAO);
+    glGenBuffers(1, vo->EBO);
+    glGenBuffers(1, vo->VBO);
+    glGenVertexArrays(1, vo->VAO);
+    glBindVertexArray(vo->VAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, mesh->VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, vo->VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vo->EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    mesh->index_count = sizeof(indices) / sizeof(unsigned int);
+    vo->index_count = sizeof(indices) / sizeof(unsigned int);
 
     glVertexAttribPointer(0,2, GL_FLOAT, GL_FALSE, 2*sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-
-    return mesh;
 }
 
-#define SHADER_PATH_FRAG ".shaders/main.frag.glsl"
-#define SHADER_PATH_VERT ".shaders/main.vert.glsl"
+
+//Shader paths
+#define SHADER_PATH_FRAG "./shaders/main.frag.glsl"
+#define SHADER_PATH_VERT "./shaders/main.vert.glsl"
 
 
 static unsigned int compile_shaders(char *fName, GLenum type){
@@ -66,7 +78,7 @@ static unsigned int compile_shaders(char *fName, GLenum type){
 
 	const char *shSrc = Src;
 
-	glShaderSource(shObj, 1, &shSrc, (void*)0);
+	glShaderSource(shObj, 1, &shSrc, NULL);
 	glCompileShader(shObj);
 
 	int ok = 0;
@@ -80,7 +92,7 @@ static unsigned int compile_shaders(char *fName, GLenum type){
 	return shObj;
 }
 
-static void Shader_init(Shader* shader){
+static void init_Shaders(Shader* shader){
     unsigned int frag, vert;
     frag = compile_shaders(SHADER_PATH_FRAG, GL_FRAGMENT_SHADER);
     vert = compile_shaders(SHADER_PATH_VERT, GL_VERTEX_SHADER);
@@ -100,4 +112,15 @@ static void Shader_init(Shader* shader){
     shader->color_u_loc = glGetUniformLocation(shader->id, "u_color");
     shader->view_u_loc  = glGetUniformLocation(shader->id, "u_view");
     shader->model_u_loc = glGetUniformLocation(shader->id, "u_model");
+}
+
+void set_uniform(unsigned int location, void* data, UniformType type){
+        switch (type) {
+        case UNIFORM_VEC4:
+            glUniform4fv(location, 1, (float*)data);
+            break;
+        case UNIFORM_MAT4:
+            glUniformMatrix4fv(location, 1, GL_FALSE, (float*)data);
+            break;
+    }
 }
