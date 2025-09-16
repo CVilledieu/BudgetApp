@@ -13,9 +13,9 @@ typedef struct Widget{
 } Widget;
 
 typedef enum Widget_Type{
-    CONTAINER_TYPE_CANVAS,
-    CONTAINER_TYPE_CONTAINER,
-    CONTAINER_TYPE_BUTTON, 
+    CONTAINER,
+    BUTTON,
+    LABEL, 
 } Widget_Type;
 
 typedef struct RenderData {

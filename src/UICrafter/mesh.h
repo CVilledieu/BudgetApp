@@ -12,6 +12,7 @@ typedef enum UniformType;
 
 typedef float Mat4[16];
 typedef float Vec4[4];
+typedef float Vec2[2];
 
 typedef struct Mesh {
     MeshType mType;

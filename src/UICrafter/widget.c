@@ -1,17 +1,32 @@
+#include <stdlib.h>
 #include "widget.h"
 
-static void draw(RenderData* rend_data);
+static RenderData* create_RenderData(MeshType type, Vec2 pos, float height, float width);
 
-Widget* Widget_create(Widget_Type type){
-    Widget* new = malloc(sizeof(Widget));
+Widget* create_Widget(Widget* parent, Widget_Type type, Vec2 pos, float height, float width){
+    Widget* new_widget = malloc(sizeof(Widget));
+    new_widget->render_data = create_RenderData(type, pos, height, width);
+    new_widget->child_count = 0;
+    new_widget->children = NULL;
+    new_widget->parent = parent;
     switch(type){
-        case CONTAINER_TYPE_CANVAS:
+        case CONTAINER:
+            new_widget->visible = 1;
             break;
-        case CONTAINER_TYPE_CONTAINER:
+        case BUTTON:
+            new_widget->visible = 1;
             break;
-        case CONTAINER_TYPE_BUTTON:
+        case LABEL:
+            break;
+        default:
+            //Catch and handle errors
             break;
     }
-    return new;
+    return new_widget;
 }
 
+static RenderData* create_RenderData(MeshType type, Vec2 pos, float height, float width){
+    RenderData* render_data = malloc(sizeof(RenderData));
+
+    return render_data;
+}
