@@ -1,6 +1,9 @@
 #ifndef MESH_H
 #define MESH_H
 
+
+#define MAX_MESH_TYPES 1
+
 //Forward declarations
 typedef struct Shader;
 typedef struct VertexData;
@@ -42,5 +45,6 @@ typedef enum {
 
 Mesh* init_Mesh(MeshType type);
 void render_Mesh(Mesh* mesh, Mat4 model, Vec4 color);
+void init_Mesh_array(Mesh meshes[MAX_MESH_TYPES]);
 
 #endif

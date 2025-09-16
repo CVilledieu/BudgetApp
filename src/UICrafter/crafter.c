@@ -8,39 +8,35 @@
 #include "widget.h"
 
 
-static void first_render_step(Vec4 color);
-static void last_render_step(WndCtx* wc);
+static void prep_buffer(Vec4 color);
+static void swap_buffer(WndCtx* wc);
 
 
-UICtx* UICtx_init(char* title){
+UICtx* init_UICtx(char* title){
     UICtx* uc = malloc(sizeof(UICtx));
     uc->wnd = init_WndCtx(title, 600, 800);
+    init_Mesh_array(uc->meshes);
     return uc;
 }
 
 
 
+//Single step of a loop, so the app using the ui can have logic run each step also
+void render(UICtx* uc){
+    prep_buffer(uc->panel_color);
 
-void render_UI(UICtx* uc){
-    //Pre render processes
-
-    int stop_render = 0;
-    while(!stop_render){
-        first_render_step(uc->panel_color);
-
-        last_render_step(uc->wnd);
-    }
+    swap_buffer(uc->wnd);
 }
 
 static void render_element(Widget* widget, Mesh* mesh, Mat4 view){}
 
 
-static void first_render_step(Vec4 color){
+static void prep_buffer(Vec4 color){
     glClearColor(color[0], color[1], color[2], color[3]);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-static void last_render_step(WndCtx* wc){
+static void swap_buffer(WndCtx* wc){
     glfwSwapBuffers(wc->wnd);
     glfwPollEvents();
 }
