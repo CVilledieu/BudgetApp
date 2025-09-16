@@ -39,13 +39,16 @@ typedef struct VertexObject{
 }VertexObject;
 
 typedef enum {
-    UT_VEC4,
-    UT_MAT4,
+    UNI_VEC2,
+    UNI_VEC4,
+    UNI_MAT4,
 } UniformType;
 
 
 Mesh* init_Mesh(MeshType type);
 void render_Mesh(Mesh* mesh, Mat4 model, Vec4 color);
 void init_Mesh_array(Mesh meshes[MAX_MESH_TYPES]);
+
+void set_uniform(unsigned int location, void* data, UniformType type);
 
 #endif

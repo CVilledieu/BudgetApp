@@ -19,5 +19,4 @@
 .DS_Store
 Thumbs.db
 bin/
-design.txt
-styleguide.md
+docs/

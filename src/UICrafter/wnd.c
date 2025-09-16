@@ -1,3 +1,8 @@
+//
+//
+//
+//
+//
 #include "wnd.h"
 
 static void resize_cb(GLFWwindow* wnd, int new_width, int new_height) {

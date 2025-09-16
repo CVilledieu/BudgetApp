@@ -1,10 +1,12 @@
-//Mesh should be initialized near at start up
-//The Mesh should then be refrenced for each Widget using that MeshType
-//This should reduce the number of Meshes and shaders created
+//
+//An array containing all Meshes should be initialized near at start up
+//The Widget should contain a MeshType that can be used to refrence the Mesh needed during render
+//The goal / reason for this is to reduce the number of meshes needed
+//
 //Due to currently only having 1 MeshType so I have avoided unnecessary complexity 
 //Once additional Meshtpes are needed many functions will be updated to handle them
 //Areas that are expected to be updated with MeshTyping have been noted as such
-
+//
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "mesh.h"
@@ -114,12 +116,12 @@ static void init_Shaders(Shader* shader){
     shader->model_u_loc = glGetUniformLocation(shader->id, "u_model");
 }
 
-static void set_uniform(unsigned int location, void* data, UniformType type){
+void set_uniform(unsigned int location, void* data, UniformType type){
         switch (type) {
-        case UT_VEC4:
+        case UNI_VEC4:
             glUniform4fv(location, 1, (float*)data);
             break;
-        case UT_MAT4:
+        case UNI_MAT4:
             glUniformMatrix4fv(location, 1, GL_FALSE, (float*)data);
             break;
     }
@@ -129,9 +131,6 @@ static void set_uniform(unsigned int location, void* data, UniformType type){
 void render_Mesh(Mesh* mesh, Mat4 model, Vec4 color){
     //switch(MeshType){
     //  case SQUARE: 
-    
-    set_uniform(mesh->shader->color_u_loc, color, UT_VEC4);
-    set_uniform(mesh->shader->model_u_loc, model, UT_MAT4);
     glBindVertexArray(mesh->VO->VAO);
     glDrawElements(GL_TRIANGLES, mesh->VO->index_count,GL_UNSIGNED_INT, 0);
     
