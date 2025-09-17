@@ -14,7 +14,7 @@ typedef float Vec4[4];
 typedef float Vec2[2];
 
 typedef struct Mesh {
-    MeshType mType;
+    MeshType mesh_type;
     VertexObject* VO;
     Shader* shader;
 } Mesh;

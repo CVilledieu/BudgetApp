@@ -19,7 +19,7 @@ static void create_VertexData(VertexObject* vo);
 //Pending MeshTyping
 Mesh* init_Mesh(MeshType type){
     Mesh* mesh = malloc(sizeof(Mesh));
-    mesh->mType = SQUARE;
+    mesh->mesh_type = SQUARE;
     create_VertexData(mesh->VO);
     init_Shaders(mesh->shader);
     return mesh;
@@ -52,13 +52,13 @@ static void create_VertexData(VertexObject* vo){
 
     vo->index_count = sizeof(indices) / sizeof(unsigned int);
 
-    glVertexAttribPointer(0,2, GL_FLOAT, GL_FALSE, 2*sizeof(float), (void*)0);
+    glVertexAttribPointer(0,2, GL_FLOAT, GL_FALSE, 2*sizeof(float), NULL);
     glEnableVertexAttribArray(0);
 }
 
 
 //Pending MeshTyping
-void render_Mesh(Mesh* mesh, Mat4 model, Vec4 color){
+void render_Mesh(Mesh* mesh, Mat4 model){
     //switch(MeshType){
     //  case SQUARE: 
     glBindVertexArray(mesh->VO->VAO);
