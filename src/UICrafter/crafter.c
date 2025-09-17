@@ -1,6 +1,6 @@
 //
-//
-//
+//Crafter acts as the layout manager.
+//Crafter takes in coordinates relative to an origin that is in the upper left and then normalizes them to screen coordinates for OpenGl
 //
 #include <stdio.h>
 #include <stdlib.h>
