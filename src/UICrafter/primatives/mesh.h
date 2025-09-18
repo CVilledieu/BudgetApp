@@ -7,22 +7,16 @@
 
 //Forward declarations
 typedef struct VertexData;
-typedef enum MeshType;
 
-typedef float Mat4[16];
-typedef float Vec4[4];
-typedef float Vec2[2];
+typedef enum {
+    SQUARE,
+} MeshType;
 
 typedef struct Mesh {
     MeshType mesh_type;
     VertexObject* VO;
     Shader* shader;
 } Mesh;
-
-typedef enum {
-    SQUARE,
-} MeshType;
-
 
 typedef struct VertexObject{
     unsigned int VAO;
@@ -34,7 +28,7 @@ typedef struct VertexObject{
 
 
 Mesh* init_Mesh(MeshType type);
-void render_Mesh(Mesh* mesh, Mat4 model, Vec4 color);
+void render_Mesh(Mesh* mesh);
 void init_Mesh_array(Mesh meshes[MAX_MESH_TYPES]);
 
 

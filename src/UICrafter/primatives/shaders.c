@@ -13,10 +13,51 @@
 
 
 static void create_UniformInfo(UniformType u_type, DataType d_type, Shader* shader, char* name);
+static unsigned int compile_shaders(char *fName, GLenum type);
 
-//Pending MeshTyping
-#define SHADER_PATH_FRAG "./shaders/main.frag.glsl"
-#define SHADER_PATH_VERT "./shaders/main.vert.glsl"
+
+//When future shaders are added, this func will be updated
+//ShaderType will cause the correct values to be set
+void init_Shader(Shader* shader, ShaderType s_type){
+    unsigned int frag, vert;
+    frag = compile_shaders(SHADER_PATH_FRAG, GL_FRAGMENT_SHADER);
+    vert = compile_shaders(SHADER_PATH_VERT, GL_VERTEX_SHADER);
+    shader->id = glCreateProgram();
+    glAttachShader(shader->id, frag);
+    glAttachShader(shader->id, vert);
+    glLinkProgram(shader->id);
+
+    int ok;
+    glGetProgramiv(shader->id, GL_LINK_STATUS, &ok);
+    if (!ok){
+        printf("%s\n", "Failed to compile shader");
+        glfwTerminate();
+    }
+    glDeleteShader(frag);
+    glDeleteShader(vert);
+    shader->type = s_type;
+    shader->uniform_count = 0;
+    create_UniformInfo(COLOR, VEC4, shader, COLOR_UNIFORM);
+    create_UniformInfo(MODEL, MAT4, shader, MODEL_UNIFORM);
+    create_UniformInfo(VIEW, MAT4, shader, VIEW_UNIFORM);
+
+}
+
+void set_uniform_data(UniformInfo* uni, void* data){
+    switch (uni->data_type) {
+        case VEC2:
+            break;
+        case VEC4:
+            glUniform4fv(uni->location, 1, (float*)data);
+            break;
+        case MAT4:
+            glUniformMatrix4fv(uni->location, 1, GL_FALSE, (float*)data);
+            break;
+        default:
+            //catch errors
+            break;
+    }
+}
 
 
 static unsigned int compile_shaders(char *fName, GLenum type){
@@ -54,33 +95,6 @@ static unsigned int compile_shaders(char *fName, GLenum type){
 	return shObj;
 }
 
-//When future shaders are added, this func will be updated
-//ShaderType will cause the correct values to be set
-void init_Shader(Shader* shader, ShaderType s_type){
-    unsigned int frag, vert;
-    frag = compile_shaders(SHADER_PATH_FRAG, GL_FRAGMENT_SHADER);
-    vert = compile_shaders(SHADER_PATH_VERT, GL_VERTEX_SHADER);
-    shader->id = glCreateProgram();
-    glAttachShader(shader->id, frag);
-    glAttachShader(shader->id, vert);
-    glLinkProgram(shader->id);
-
-    int ok;
-    glGetProgramiv(shader->id, GL_LINK_STATUS, &ok);
-    if (!ok){
-        printf("%s\n", "Failed to compile shader");
-        glfwTerminate();
-    }
-    glDeleteShader(frag);
-    glDeleteShader(vert);
-    shader->type = s_type;
-    shader->uniform_count = 0;
-    create_UniformInfo(COLOR, VEC4, shader, "u_color");
-    create_UniformInfo(MODEL, MAT4, shader, "u_shader");
-    create_UniformInfo(VIEW, MAT4, shader, "u_view");
-
-}
-
 static void create_UniformInfo(UniformType u_type, DataType d_type, Shader* shader, char* name){
     UniformInfo new_Uniform;
     new_Uniform.data_type = d_type;
@@ -91,19 +105,3 @@ static void create_UniformInfo(UniformType u_type, DataType d_type, Shader* shad
     shader->uniform_count++;
 }
 
-
-void set_uniform_data(UniformInfo* uni, void* data){
-    switch (uni->data_type) {
-        case VEC2:
-            break;
-        case VEC4:
-            glUniform4fv(uni->location, 1, (float*)data);
-            break;
-        case MAT4:
-            glUniformMatrix4fv(uni->location, 1, GL_FALSE, (float*)data);
-            break;
-        default:
-            //catch errors
-            break;
-    }
-}

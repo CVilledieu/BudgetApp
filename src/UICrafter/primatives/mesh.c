@@ -19,16 +19,15 @@ static void create_VertexData(VertexObject* vo);
 //Pending MeshTyping
 Mesh* init_Mesh(MeshType type){
     Mesh* mesh = malloc(sizeof(Mesh));
-    mesh->mesh_type = SQUARE;
+    switch(type){
+        case SQUARE:
+            mesh->mesh_type = SQUARE;
+            break;
+    }
+    
     create_VertexData(mesh->VO);
-    init_Shaders(mesh->shader);
+    
     return mesh;
-}
-
-//New VertexData creation method similar to shaders creation
-//Loading vertex data from a seperate file should provide flexibility in the future when creating the components
-static void load_VertexData(char* fName){
-
 }
 
 //Pending MeshTyping
@@ -58,13 +57,11 @@ static void create_VertexData(VertexObject* vo){
 
 
 //Pending MeshTyping
-void render_Mesh(Mesh* mesh, Mat4 model){
+void render_Mesh(Mesh* mesh){
     //switch(MeshType){
     //  case SQUARE: 
     glBindVertexArray(mesh->VO->VAO);
     glDrawElements(GL_TRIANGLES, mesh->VO->index_count,GL_UNSIGNED_INT, 0);
-    
-    
     // break;
     //}
     glBindVertexArray(0);

@@ -41,6 +41,9 @@ static RenderData* create_RenderData(MeshType type, Vec2 pos, float height, floa
 //At the moment functions is simple, but will add functionality 
 //Based on RenderData's MeshType will change which uniforms get set
 void set_render_data(Shader* shader, RenderData* render_data){
+    for (int i = 0; i < shader->uniform_count; i++){
+        
+    }
     set_uniform(shader->color_u_loc, render_data->color, UNI_VEC4);
     set_uniform(shader->model_u_loc, render_data->model, UNI_MAT4);
 }
