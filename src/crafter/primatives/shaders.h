@@ -35,6 +35,7 @@ typedef struct UniformInfo{
 
 typedef enum {
     BASIC,
+    SHADER_COUNT,
 } ShaderType;
 
 typedef struct Shader{

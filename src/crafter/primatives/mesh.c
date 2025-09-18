@@ -22,6 +22,7 @@ Mesh* init_Mesh(MeshType type){
     switch(type){
         case SQUARE:
             mesh->mesh_type = SQUARE;
+            
             break;
     }
     
