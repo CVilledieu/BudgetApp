@@ -13,8 +13,8 @@
 static void create_VertexData(VertexObject* vo);
 
 //Pending MeshTyping
-Mesh* init_Mesh(MeshType type){
-    Mesh* mesh = malloc(sizeof(Mesh));
+void init_Mesh(Mesh* mesh, MeshType type){
+    
     switch(type){
         case SQUARE:
             mesh->mesh_type = SQUARE;

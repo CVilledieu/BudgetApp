@@ -1,7 +1,9 @@
 //
-//Shaders are currently stored within a mesh, because there is currently only 1 mesh
-//At the moment that seems fine, but for more complex creations this may be an issue.
-//May update this so that UICtx(layout manager) stores the meshes and shaders seperated.
+//Orthograhpic projection matrix options
+//Pass the size and position of each element into the renderer to create the matrix temperarily each render
+//Or 
+//Pass the model matrix that is stored with the element to the renderer. Matrix would need to be created at element init
+//  Unsure how often they would then need to be updated.
 //
 //When new shaders are needed init_Shader() will get updated to compile the correct shaders and adding the correct uniforms
 //
