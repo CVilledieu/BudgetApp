@@ -1,8 +1,8 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include "primatives/mesh.h"
 
-#include "mesh.h"
 
 typedef struct Widget{
     int visible;

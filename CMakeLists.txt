@@ -1,20 +1,24 @@
 cmake_minimum_required(VERSION 3.10)
 
+
 project(BudgetApp C)
 
 set(CMAKE_C_STANDARD 99)
 
-# Source files
-file(GLOB_RECURSE SRC_FILES src/*.c)
-
 # Include directories
 include_directories(include)
 
-# Add executable
-add_executable(BudgetApp ${SRC_FILES})
+# Crafter static library
+file(GLOB_RECURSE CRAFTER_SRC src/crafter/*.c)
+add_library(CrafterLib STATIC ${CRAFTER_SRC})
 
-# Link libraries (adjust as needed)
-target_link_libraries(BudgetApp PRIVATE glfw3)
+# Main app sources
+set(MAIN_SRC src/main.c)
+file(GLOB_RECURSE BUDGET_SRC src/budget_app/*.c)
+add_executable(BudgetApp ${MAIN_SRC} ${BUDGET_SRC})
+
+# Link libraries
+target_link_libraries(BudgetApp PRIVATE CrafterLib glfw3)
 
 # For Windows, link OpenGL
 if (WIN32)

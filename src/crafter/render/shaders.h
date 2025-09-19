@@ -1,8 +1,10 @@
 #ifndef SHADERS_H
 #define SHADERS_H
 
-//Not the best solution as future shaders may need more, but that would cause a wasted space for the smaller shaders
-#define MAX_UNIFORM_COUNT 3
+#include "glad/glad.h"
+#include "GLFW/glfw3.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define SHADER_PATH_FRAG "./shaders/main.frag.glsl"
 #define SHADER_PATH_VERT "./shaders/main.vert.glsl"
@@ -22,9 +24,10 @@ typedef enum {
 } DataType;
 
 typedef enum {
+    VIEW,
     COLOR, 
     MODEL,
-    VIEW,
+    UNIFORM_TYPE_COUNT,
 } UniformType;
 
 typedef struct UniformInfo{
@@ -35,14 +38,14 @@ typedef struct UniformInfo{
 
 typedef enum {
     BASIC,
-    SHADER_COUNT,
+    SHADER_TYPE_COUNT,
 } ShaderType;
 
 typedef struct Shader{
     unsigned int id;
-    ShaderType type;
     int uniform_count;
-    UniformInfo uniforms[MAX_UNIFORM_COUNT];
+    ShaderType type;
+    UniformInfo uniforms[UNIFORM_TYPE_COUNT];
 } Shader;
 
 void init_Shader(Shader* shader, ShaderType s_type);

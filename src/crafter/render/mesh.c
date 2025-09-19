@@ -7,11 +7,7 @@
 //Once additional Meshtpes are needed many functions will be updated to handle them
 //Areas that are expected to be updated with MeshTyping have been noted as such
 //
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
 #include "mesh.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 //Forward declarations
 static void create_VertexData(VertexObject* vo);

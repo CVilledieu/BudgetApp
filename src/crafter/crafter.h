@@ -2,7 +2,8 @@
 #define CRAFTER_H
 
 #include "wnd.h"
-#include "mesh.h"
+#include "primatives/mesh.h"
+#include "primatives/shaders.h"
 
 
 typedef struct Crafter{

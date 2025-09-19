@@ -5,7 +5,7 @@
 
 typedef enum {
     SQUARE,
-    MESH_COUNT,
+    MESH_TYPE_COUNT,
 } MeshType;
 
 typedef struct VertexObject{

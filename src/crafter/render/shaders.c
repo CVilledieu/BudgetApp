@@ -5,11 +5,7 @@
 //
 //When new shaders are needed init_Shader() will get updated to compile the correct shaders and adding the correct uniforms
 //
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
 #include "shaders.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 
 static void create_UniformInfo(UniformType u_type, DataType d_type, Shader* shader, char* name);

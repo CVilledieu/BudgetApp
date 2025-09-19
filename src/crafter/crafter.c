@@ -8,7 +8,7 @@
 #include "GLFW/glfw3.h"
 #include "wnd.h"
 #include "crafter.h"
-#include "widget.h"
+
 
 
 static void prep_buffer(Vec4 color);
