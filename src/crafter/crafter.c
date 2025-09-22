@@ -33,14 +33,3 @@ void render(UICtx* uc){
 
 static void render_element(Widget* widget, Mesh* mesh, Mat4 view){}
 
-
-static void prep_buffer(Vec4 color){
-    glClearColor(color[0], color[1], color[2], color[3]);
-    glClear(GL_COLOR_BUFFER_BIT);
-}
-
-static void swap_buffer(WndCtx* wc){
-    glfwSwapBuffers(wc->wnd);
-    glfwPollEvents();
-}
-

@@ -41,15 +41,15 @@ void init_Shader(Shader* shader, ShaderType s_type){
 
 }
 
-void set_uniform_data(UniformInfo* uni, void* data){
-    switch (uni->data_type) {
+void set_uniform_data(UniformInfo uni, void* data){
+    switch (uni.data_type) {
         case VEC2:
             break;
         case VEC4:
-            glUniform4fv(uni->location, 1, (float*)data);
+            glUniform4fv(uni.location, 1, (float*)data);
             break;
         case MAT4:
-            glUniformMatrix4fv(uni->location, 1, GL_FALSE, (float*)data);
+            glUniformMatrix4fv(uni.location, 1, GL_FALSE, (float*)data);
             break;
         default:
             //catch errors

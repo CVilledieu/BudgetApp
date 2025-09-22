@@ -4,6 +4,9 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
+#define DEFAULT_HEIGHT 600
+#define DEFAULT_WIDTH 800
+
 #define MAX_WND_TITLE 16
 
 typedef struct WndCtx{

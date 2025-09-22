@@ -49,7 +49,7 @@ typedef struct Shader{
 } Shader;
 
 void init_Shader(Shader* shader, ShaderType s_type);
-void set_uniform_data(UniformInfo* uni, void* data);
+void set_uniform_data(UniformInfo uni, void* data);
 
 
 #endif

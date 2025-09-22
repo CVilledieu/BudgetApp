@@ -5,6 +5,7 @@
 //
 #include "wnd.h"
 
+
 static void resize_cb(GLFWwindow* wnd, int new_width, int new_height) {
     WndCtx* ctx = (WndCtx*)glfwGetWindowUserPointer(wnd);
     ctx->height = new_height;
