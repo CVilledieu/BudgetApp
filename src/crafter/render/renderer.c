@@ -67,4 +67,3 @@ static void swap_buffer(WndCtx* wc){
     glfwSwapBuffers(wc->wnd);
     glfwPollEvents();
 }
-

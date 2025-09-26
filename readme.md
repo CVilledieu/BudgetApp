@@ -6,7 +6,7 @@
 
 UICrafter is gui library made using opengl and C.
 
-### BudgetApp
+### Demo App
 
 A simple app to demo the gui lib
 

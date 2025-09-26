@@ -11,6 +11,13 @@ typedef struct Renderer{
     Mesh meshes[MESH_TYPE_COUNT];
 } Renderer;
 
+typedef struct Model{
+    float pos_x;
+    float pos_y;
+    float height;
+    float width;
+} Model;
+
 typedef struct Model {
     float x;
     float y;

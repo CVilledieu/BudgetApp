@@ -5,6 +5,11 @@
 
 typedef enum {
     SQUARE,
+    ROUNDED, //Square with rounded edges
+    CIRCLE, //or round
+    LINE,
+    TRIANGE,
+    GLYPH, //Labels or text. Avoiding TEXT unless I find a better word than texture for shaders
     MESH_TYPE_COUNT,
 } MeshType;
 
