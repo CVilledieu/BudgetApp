@@ -16,6 +16,9 @@ typedef struct Model{
     float pos_y;
     float height;
     float width;
+    
+    Vec4 color;
+    
 } Model;
 
 typedef struct Model {

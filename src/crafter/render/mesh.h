@@ -24,9 +24,15 @@ typedef struct VertexObject{
 //This may lead to problems down the road, but it may cut down on some unneeded searching/look ups
 typedef struct Mesh {
     MeshType mesh_type;
-    ShaderType shader_type; //Shader_type = Shader_index
+    ShaderType shader_type; //Shader_type = index of shader
     VertexObject* VO; //Since these are simply values I should be able to pass by value instead of a pointer
 } Mesh;
+
+typedef struct Texture{
+    unsigned int id;
+    float height;
+    float width;
+} Texture;
 
 Mesh* init_Mesh(MeshType type);
 void render_Mesh(Mesh* mesh);
