@@ -19,7 +19,7 @@ typedef struct Mesh {
     int index_count;
 } Mesh;
 
-typedef struct Texture{ //test
+typedef struct Texture{
     unsigned int id;
     float height;
     float width;
